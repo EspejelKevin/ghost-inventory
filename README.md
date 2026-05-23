@@ -35,8 +35,8 @@ El sistema desacopla los casos de uso principales de las herramientas de tercero
 ```text
 src/
 ├── domain/                  # Modelos de Dominio Puros y Lógica de Negocio
-    ├── interfaces/                   # Interfaces de Entrada y Salida (Clases Abstractas)
-├── application/               # Comandos de la Aplicación (Reservar, Pagar, Expirar)
+    ├── interfaces/          # Interfaces de Entrada y Salida (Clases Abstractas)
+├── application/             # Comandos de la Aplicación (Reservar, Pagar, Expirar)
 └── infrastructure/          # Controladores (FastAPI), Adaptadores (PostgreSQL, Redis, APScheduler)
 ```
 
