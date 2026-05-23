@@ -2,8 +2,8 @@ from dependency_injector import containers, providers
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from apscheduler.jobstores.redis import RedisJobStore
 
-from infrastructure import PostgresSeatRepository, PostgresOrderRepository, APSchedulerAdapter, get_db_session
-from application import ReserveSeatUseCase
+from src.infrastructure import PostgresSeatRepository, PostgresOrderRepository, APSchedulerAdapter, get_db_session
+from src.application import ReserveSeatUseCase
 
 
 class Container(containers.DeclarativeContainer):

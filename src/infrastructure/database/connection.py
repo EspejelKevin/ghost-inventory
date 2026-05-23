@@ -4,7 +4,7 @@ from sqlalchemy.orm import sessionmaker, declarative_base
 from typing import Generator
 
 
-DATABASE_URL = "postgresql://postgres:postgres@localhost:5432/ticketmaster_db"
+DATABASE_URL = "postgresql://postgres:postgres@localhost:5432/ghost_inventory_db"
 
 engine = create_engine(DATABASE_URL, echo=False)
 
