@@ -1,6 +1,7 @@
 from sqlalchemy.orm import Session
 
 from domain import OrderRepository, Order, OrderStatus
+from ...models.order import OrderModel
 
 
 class PostgresOrderRepository(OrderRepository):
