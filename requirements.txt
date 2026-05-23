@@ -1,2 +1,8 @@
 sqlalchemy
 apscheduler
+dependency-injector
+fastapi
+uvicorn
+alembic
+psycopg2-binary
+redis
