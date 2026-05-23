@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Session
 
-from domain import OrderRepository, Order, OrderStatus
+from src.domain import OrderRepository, Order, OrderStatus
 from ...models.order import OrderModel
 
 

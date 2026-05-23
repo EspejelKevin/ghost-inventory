@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Session
 
-from domain import SeatRepository, Seat, SeatStatus
+from src.domain import SeatRepository, Seat, SeatStatus
 from ...models.seat import SeatModel
 
 

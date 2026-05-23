@@ -2,7 +2,7 @@ from apscheduler.schedulers.base import BaseScheduler
 
 from datetime import datetime
 
-from domain import TaskScheduler
+from src.domain import TaskScheduler
 
 
 def expire_reservation_task(seat_id: int, order_id: int) -> None:

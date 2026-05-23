@@ -2,7 +2,7 @@ import uuid
 
 from datetime import datetime, timedelta, timezone
 
-from domain import SeatRepository, OrderRepository, TaskScheduler
+from src.domain import SeatRepository, OrderRepository, TaskScheduler
 
 
 class ReserveSeatUseCase:
