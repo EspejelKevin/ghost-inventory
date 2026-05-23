@@ -221,3 +221,7 @@ __marimo__/
 
 # bash scripts
 *.sh
+
+# alembic
+/alembic
+*.ini
