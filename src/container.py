@@ -6,13 +6,17 @@ from src.infrastructure import PostgresSeatRepository, PostgresOrderRepository, 
 from src.application import ReserveSeatUseCase
 
 
+def init_apscheduler() -> AsyncIOScheduler:
+    jobstores = {
+        'default': RedisJobStore(host='localhost', port=6379, db=0)
+    }
+    return AsyncIOScheduler(jobstores=jobstores)
+
+
 class Container(containers.DeclarativeContainer):
     db_session = providers.Resource(get_db_session)
 
-    scheduler = providers.Singleton(
-        AsyncIOScheduler,
-        jobstores={'default': RedisJobStore(host='localhost', port=6379, db=0)}
-    )
+    scheduler = providers.Singleton(init_apscheduler)
 
     seat_repository = providers.Factory(
         PostgresSeatRepository,
@@ -33,5 +37,5 @@ class Container(containers.DeclarativeContainer):
         ReserveSeatUseCase,
         seat_repository=seat_repository,
         order_repository=order_repository,
-        scheduler=scheduler
+        scheduler=task_scheduler
     )
