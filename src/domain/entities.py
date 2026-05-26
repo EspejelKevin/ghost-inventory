@@ -30,6 +30,11 @@ class Seat:
             raise ValueError('Solo se pueden comprar asientos previamente reservados')
         self.status = SeatStatus.SOLD
 
+    def release(self):
+        if self.status == SeatStatus.RESERVED:
+            self.status = SeatStatus.AVAILABLE
+
+
 @dataclass
 class Order:
     id: int
@@ -41,3 +46,7 @@ class Order:
         if self.status != OrderStatus.PENDING:
             raise ValueError('La orden ya fue procesada o expiró')
         self.status = OrderStatus.COMPLETED
+
+    def expire(self):
+        if self.status == OrderStatus.PENDING:
+            self.status = OrderStatus.EXPIRED
