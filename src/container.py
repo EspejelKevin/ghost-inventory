@@ -3,7 +3,7 @@ from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from apscheduler.jobstores.redis import RedisJobStore
 
 from src.infrastructure import PostgresSeatRepository, PostgresOrderRepository, APSchedulerAdapter, get_db_session
-from src.application import ReserveSeatUseCase
+from src.application import ReserveSeatUseCase, ConfirmPaymentUseCase
 
 
 def init_apscheduler() -> AsyncIOScheduler:
@@ -35,6 +35,13 @@ class Container(containers.DeclarativeContainer):
 
     reserve_seat_usecase = providers.Factory(
         ReserveSeatUseCase,
+        seat_repository=seat_repository,
+        order_repository=order_repository,
+        scheduler=task_scheduler
+    )
+
+    confirm_payment_usecase = providers.Factory(
+        ConfirmPaymentUseCase,
         seat_repository=seat_repository,
         order_repository=order_repository,
         scheduler=task_scheduler
