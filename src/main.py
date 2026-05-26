@@ -5,7 +5,7 @@ from pydantic import BaseModel
 import sys
 
 from src.container import Container
-from src.application import ReserveSeatUseCase
+from src.application import ReserveSeatUseCase, ConfirmPaymentUseCase
 from src.infrastructure import SessionLocal, SeatModel
 
 
@@ -35,8 +35,27 @@ def reserve_seat_endpoint(
     try:
         result = usecase.execute(seat_id)
         return {
-            'status': 'success',
-            'message': 'asiento reservado exitosamente.',
+            'status': 'Success',
+            'message': 'Asiento reservado exitosamente',
+            'data': result
+        }
+    except ValueError as e:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=str(e))
+    except Exception as e:
+        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=f'Error interno del servidor: {str(e)}')
+    
+
+@app.post('/api/v1/reservations/{order_id}/pay', status_code=status.HTTP_201_CREATED)
+@inject
+def confirm_payment_endpoint(
+    order_id: int,
+    usecase: ConfirmPaymentUseCase = Depends(Provide[Container.confirm_payment_usecase])
+):
+    try:
+        result = usecase.execute(order_id)
+        return {
+            'status': 'Success',
+            'message': 'Pago procesado exitosamente',
             'data': result
         }
     except ValueError as e:
