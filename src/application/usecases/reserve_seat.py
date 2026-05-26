@@ -23,12 +23,13 @@ class ReserveSeatUseCase:
 
         order = self.order_repository.create_pending_order(seat_id)
         
-        expires_at = datetime.now(timezone.utc) + timedelta(minutes=8)
+        expires_at = datetime.now(timezone.utc) + timedelta(minutes=1)
         job_id = f'expire_seat_{seat_id}_order_{order.id}'
+        print(f'Job {job_id}')
 
         self.scheduler.schedule_expiration(job_id, expires_at, seat_id, order.id)
 
         return {
-            'reservation_id': str(uuid.uuid4()),
+            'reservation_id': order.id,
             'expires_at': expires_at.isoformat()
         }
