@@ -1,2 +1,3 @@
 from .usecases.reserve_seat import ReserveSeatUseCase
 from .usecases.confirm_payment import ConfirmPaymentUseCase
+from .usecases.expire_reservation import ExpireReservationUseCase
