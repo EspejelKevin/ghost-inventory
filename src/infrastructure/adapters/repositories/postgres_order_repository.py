@@ -20,3 +20,23 @@ class PostgresOrderRepository(OrderRepository):
             status=OrderStatus(new_order.status),
             created_at=new_order.created_at
         )
+    
+    def get_order(self, order_id: int) -> Order | None:
+        order_orm = self.session.query(OrderModel).filter_by(id=order_id).first()
+        
+        if not order_orm:
+            return None
+        
+        return Order(
+            id=order_orm.id,
+            seat_id=order_orm.seat_id,
+            status=OrderStatus(order_orm.status),
+            created_at=order_orm.created_at
+        )
+    
+    def save(self, order: Order) -> None:
+        order_orm = self.session.query(OrderModel).filter_by(id=order.id).first()
+        
+        if order_orm:
+            order_orm.status = order.status.value
+            self.session.commit()

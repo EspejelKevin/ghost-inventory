@@ -23,3 +23,10 @@ class APSchedulerAdapter(TaskScheduler):
             replace_existing=True,
             misfire_grace_time=300
         )
+
+    def cancel_expiration(self, job_id: str) -> None:
+        try:
+            self.scheduler.remove_job(job_id)
+            print(f"Job {job_id} cancelado exitosamente. Boleto pagado")
+        except Exception:
+            pass
